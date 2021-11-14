@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+ <div class="container">
+     <h2 class="text-center" style="padding-top: 20px; margin-bottom: 30px;">User List</h2>
+<table class="table">
+<thead>
+<tr>
+  <th scope="col">Username</th>
+  <th scope="col">Email Id</th>
+  <th scope="col">Address</th>
+  <th scope="col">Edit</th>
+  <th scope="col">Delete</th>
+</tr>
+</thead>
+<tbody>
+  {% for k in data %}
+<tr>
+  <td>{{k.username}}</td>
+  <td>{{k.email}}</td>
+  <td>{{k.address}}</td>
+  <td><a href="{% url 'edit' k.id %}"> <i class="fas fa-edit" aria-hidden="true"></i> </a></td>
+  <td><a href="{% url 'delete' k.id %}"> <i class="fas fa-trash" aria-hidden="true"></i> </a></td>
+</tr>
+{% endfor %}  
+</tbody>
+</table>
+ </div>
+
+  
+  {% endblock %}

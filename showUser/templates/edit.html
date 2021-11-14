@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row" style="margin-left: 350px;">
+            <div class="col-sm-6">
+                <h3>Edit User</h3>
+                <hr>
+                <form method="POST" action="" novalidate class="shadow p-5">
+                {% csrf_token %}
+                 {% if messages %}
+                 {% for message in messages %}
+                 <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p> 
+                 {% endfor %}
+                 {% endif %}
+                 <label class="fw-bold">Username:</label>
+                 <input type="Input" value="{{user}}" class="form-control" style="margin-bottom: 15px;" disabled>
+                {% for fm in userform %}
+                    <div class="form-group mb-3">
+                        {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                    </div>
+                {% endfor %}
+                {% for f in form %}
+                    <div class="form-group mb-3">
+                        {{f.label_tag}} {{f}} <small class="text-danger">{{f.errors|striptags}}</small>
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Submit" class="btn btn-primary my-2">
+                {% if userform.non_field_errors %}
+                {% for error in userform.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+                {% endfor %}
+                {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
